@@ -48,13 +48,13 @@ library(ggplot2)
 The data are grouped by *date* and the overall number of steps per day computed
 
 ```r
-data_by_date <- data %>% group_by(date) %>% summarise(total=sum(steps))
+data_by_date <- data %>% group_by(date) %>% summarise(steps=sum(steps))
 ```
 
 The histogram is plotted
 
 ```r
-g <- ggplot(data_by_date, aes(total))
+g <- ggplot(data_by_date, aes(steps))
 g <- g + geom_histogram()
 print(g)
 ```
@@ -65,10 +65,10 @@ print(g)
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
-The mean and the median across all days are respectively,
+The mean and the median of steps per day are obtained through
 
 ```r
-mean(data_by_date$total,na.rm=TRUE)
+mean(data_by_date$steps,na.rm=TRUE)
 ```
 
 ```
@@ -76,7 +76,7 @@ mean(data_by_date$total,na.rm=TRUE)
 ```
 
 ```r
-median(data_by_date$total,na.rm=TRUE)
+median(data_by_date$steps,na.rm=TRUE)
 ```
 
 ```
@@ -134,11 +134,11 @@ data_filled[is.na(data_filled$steps),'steps'] = data_filled[is.na(data_filled$st
 data_filled <- select(data_filled,-average_steps)
 ```
 
-We repeat the above operations for computing the total number of steps per day along with its mean and median for the new dataset.
+We compute the total number of steps per day along with its mean and median for the new dataset.
 
 ```r
-data_filled_by_date <- data_filled %>% group_by(date) %>% summarise(total=sum(steps))
-mean(data_filled_by_date$total,na.rm=TRUE)
+data_filled_by_date <- data_filled %>% group_by(date) %>% summarise(steps=sum(steps))
+mean(data_filled_by_date$steps,na.rm=TRUE)
 ```
 
 ```
@@ -146,7 +146,7 @@ mean(data_filled_by_date$total,na.rm=TRUE)
 ```
 
 ```r
-median(data_filled_by_date$total,na.rm=TRUE)
+median(data_filled_by_date$steps,na.rm=TRUE)
 ```
 
 ```
